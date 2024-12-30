@@ -5,8 +5,15 @@
 <mapper namespace ="com.topBalance.wishTree.mapper.WishTreeMapper">
 
     <insert id="insertWish">
+        INSERT INTO WISHTREE(USER_ID,USER_WISH) <!--,WISH_DATE)-->
+        VALUES (#{userId}, #{userWish})
+    </insert>
+<!--
+    <insert id="insertWish">
         INSERT INTO WISHTREE(USER_ID,USER_WISH,WISH_DATE)
-        VALUES (#{userId}, #{userWish}, #{wishDate});
+        VALUES (#{userId}, #{userWish}, #{wishDate})
     </insert>
 
+
+-->
 </mapper>

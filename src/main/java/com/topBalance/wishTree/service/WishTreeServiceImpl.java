@@ -12,7 +12,8 @@ public class WishTreeServiceImpl implements WishTreeService{
     private WishTreeMapper wishTreeMapper;
 
     @Override
-    public void insertWish(WishTree wishTree) {
+   public void insertWish(WishTree wishTree) {
+        wishTreeMapper.insertWish(wishTree);
 
     }
 }

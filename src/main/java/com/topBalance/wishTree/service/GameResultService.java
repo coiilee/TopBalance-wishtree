@@ -12,7 +12,7 @@ public interface GameResultService {
 
         // 트럼프 카드 + 운세점수 출력 - score_s / score_c / score_h /score_d
 //    String balanceTrump(int score_s, int score_c, int score_d, int score_h, MultipartFile trumpImagePath);
-    List<Map<String, Object>> balanceTrump(GameScores gameScores);
+    Map<String, Object> balanceTrump(GameScores gameScores);
 
     // 오늘의 운세 문구 (건강,재물,연애,학업별 문장 출력)
     String todaysLuck(CardType cardType, int cardNumber);

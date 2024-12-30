@@ -34,17 +34,13 @@ public class GameResultServiceImpl implements GameResultService {
 //    }
 
     @Override
-    public List<Map<String, Object>> balanceTrump(GameScores gameScores) {
-        List<Map<String, Object>> pathList = new ArrayList<Map<String, Object>>();
-
-        return pathList.stream().map(user -> {
-            Map<String, Object> pathMap = new HashMap<>();
-            pathMap.put("spadePath","/images/trumpcard/trumpimage/S" + gameScores.getSpadeScore() + ".png");
-            pathMap.put("cloverPath", "/images/trumpcard/trumpimage/C" + gameScores.getCloverScore() + ".png");
-            pathMap.put("heartPath", "/images/trumpcard/trumpimage/H" + gameScores.getHeartScore() + ".png");
-            pathMap.put("diamondPath", "/images/trumpcard/trumpimage/D" + gameScores.getDiamondScore() + ".png");
-            return pathMap;
-        }).collect(Collectors.toList());
+    public Map<String, Object> balanceTrump(GameScores gameScores) {
+        Map<String, Object> pathMap = new HashMap<>();
+        pathMap.put("spadePath","images/trumpcard/trumpimage/S" + gameScores.getSpadeScore() + ".png");
+        pathMap.put("cloverPath", "/images/trumpcard/trumpimage/C" + gameScores.getCloverScore() + ".png");
+        pathMap.put("heartPath", "/images/trumpcard/trumpimage/H" + gameScores.getHeartScore() + ".png");
+        pathMap.put("diamondPath", "/images/trumpcard/trumpimage/D" + gameScores.getDiamondScore() + ".png");
+        return pathMap;
     }
 
 

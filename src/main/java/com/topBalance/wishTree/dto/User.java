@@ -18,7 +18,7 @@ import java.util.Date;
 public class User {
 
     @Id // primary key
-    private int userId;
+    private String userId;
     private String userPassword;
     private String userName;
     private String userPhone;

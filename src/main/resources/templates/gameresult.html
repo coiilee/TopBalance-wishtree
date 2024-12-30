@@ -46,7 +46,7 @@
             justify-content: center;
             align-items: center;
         }
-        .trump p {
+        .trump img {
             margin: 13px;
             width: 80px;
             height: 100px;
@@ -122,35 +122,39 @@
 <body>
 
 <div class="result-container">
-    <form action="/gameresult" method="get" enctype="multipart/form-data">
-        <div class="total-luck">
+
+    <div class="total-luck">
             <p>행운지수 :</p><p th:text="${totalScore}"></p>
-        </div>
+    </div>
 
-        <br />
+    <br />
 
-        <div class="trump" th:each="${cardPath}">
-            <p th:text="${cardPath.spadePath}"></p>
-            <p th:text="${cardPath.cloverPath}"></p>
-            <p th:text="${cardPath.heartPath}"></p>
-            <p th:text="${cardPath.diamondPath}"></p>
+    <div class="trump">
 
-        </div>
-
+           <img th:src="${cardPath.cloverPath}">
+        <p>건강운</p>
+        <p th:text="${categoryScore.cloverScore}"></p>
+           <img th:src="${cardPath.diamondPath}">
+        <p>재물운</p>
+        <p th:text="${categoryScore.diamondScore}"></p>
+           <img th:src="${cardPath.cloverPath }">
+        <p>학업운</p>
+        <p th:text="${categoryScore.cloverScore}"></p>
+           <img th:src="${cardPath.heartPath}">
+        <p>연애운</p>
+        <p th:text="${categoryScore.heartScore}"></p>
+    </div>
         <hr />
 
         <div class="luck-sentence">
-            <h3><p th:text="${result['']}"></p></h3>
-            <p>
-                ▷ 오늘의 건강운 :<br />
-            <p th:text="${result['C']}"></p>
-            ▷ 오늘의 재물운 :<br />
-            <p th:text="${result['D']}"></p>
-            ▷ 오늘의 학업운 :<br />
-            <p th:text="${result['S']}"></p>
-            ▷ 오늘의 연애운 :
-            <p th:text="${result['H']}"></p>
-            </p>
+            <p>오늘의 건강운 : </p>
+            <p th:text="${categoryScore.cloverScore}"></p>
+            <p>오늘의 재물운 :</p>
+            <p th:text="${categoryScore.diamondScore}"></p>
+            <p>오늘의 학업운 :</p>
+            <p th:text="${categoryScore.cloverScore}"></p>
+            <p>오늘의 연애운 : </p>
+            <p th:text="${categoryScore.heartScore}"></p>
         </div>
 
         <hr />
@@ -161,12 +165,14 @@
 
 
         <hr />
-        <form class="wishinput">
+
+        <form class="wishinput" action="/insertWish" method="post" onsubmit="return showAlert();">
             <label>
                 <input
                         type="text"
                         maxlength="100"
                         placeholder="소원나무에 소원을 작성해 보세요!"
+                        name="userWish"
                         required
                 />
                 <button type="submit">
@@ -175,9 +181,16 @@
             </label>
         </form>
         <hr />
-        <a href="/bamboo.html">댓글 보러가기</a>
+        <a href="/bamboo">댓글 보러가기</a>
         <hr />
-    </form>
+
+
+    <script>
+        function showAlert(){
+            alert("You wish has been delivered.");
+            return true;
+        }
+    </script>
 </div>
 </body>
 </html>
