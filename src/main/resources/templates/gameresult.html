@@ -137,9 +137,9 @@
            <img th:src="${cardPath.diamondPath}">
         <p>재물운</p>
         <p th:text="${categoryScore.diamondScore}"></p>
-           <img th:src="${cardPath.cloverPath }">
+           <img th:src="${cardPath.spadePath }">
         <p>학업운</p>
-        <p th:text="${categoryScore.cloverScore}"></p>
+        <p th:text="${categoryScore.spadeScore}"></p>
            <img th:src="${cardPath.heartPath}">
         <p>연애운</p>
         <p th:text="${categoryScore.heartScore}"></p>
@@ -148,19 +148,20 @@
 
         <div class="luck-sentence">
             <p>오늘의 건강운 : </p>
-            <p th:text="${categoryScore.cloverScore}"></p>
+            <p th:text="${categoryResult.cloverResult}"></p>
             <p>오늘의 재물운 :</p>
-            <p th:text="${categoryScore.diamondScore}"></p>
+            <p th:text="${categoryResult.diamondResult}"></p>
             <p>오늘의 학업운 :</p>
-            <p th:text="${categoryScore.cloverScore}"></p>
+            <p th:text="${categoryResult.spadeResult}"></p>
             <p>오늘의 연애운 : </p>
-            <p th:text="${categoryScore.heartScore}"></p>
+            <p th:text="${categoryResult.heartResult}"></p>
         </div>
 
         <hr />
         <div class="lucky-menu">
             <h3>오늘의 추천메뉴</h3>
             <p th:text="${todaysLunch}"></p>
+            <!--<img th:src="${}">-->
         </div>
 
 

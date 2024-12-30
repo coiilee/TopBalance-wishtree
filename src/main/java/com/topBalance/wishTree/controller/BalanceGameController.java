@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.smartcardio.Card;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -66,14 +67,6 @@ public class BalanceGameController {
         return "gameresult";
     }*/
 
-    // 예비 출력구분 -> 점수 제대로 적용됐는지 확인 구분
-    @GetMapping("/gameresult")
-    public void gameResult(Model model) {
-        Logger log = LoggerFactory.getLogger(BalanceGameController.class);
-        //int spade = gamescores.getSpadeScore()
-        log.info("gameresult : " + gamescores.toString());
-    }
-
     @PostMapping("/gameresult")
     public String gameResult(@RequestParam Map<String, String> userAnswers, Model model) {
         // 선택한 목록에 따른 s, c, h, d 점수 변동
@@ -83,16 +76,22 @@ public class BalanceGameController {
         int totalScore = gameResultService.totalScore(gamescores);
         model.addAttribute("totalScore", totalScore);
 
-        // 각 점수 model 에 입력
-        model.addAttribute("categoryScore", gamescores);
+        // 게임 결과 점수 각 category에 입력하고 model에 입력
+        Map<String, Object> categoryScore = gameResultService.getOldCardScores(gamescores);
+        model.addAttribute("categoryScore", categoryScore);
 
         // 카드 max, min 찾아서 점심 값 넣기
+        CardType MAX = gameResultService.getMaxCategory(gamescores);
+        CardType MIN = gameResultService.getMinCategory(gamescores);
         String todaysLunch = gameResultService.todaysLunch(CardType.SPADE, CardType.HEART);
-        model.addAttribute("lunchMax", todaysLunch);
-        model.addAttribute("lunchMin", todaysLunch);
+        model.addAttribute("todaysLunch", todaysLunch);
 
         // 각 카드 값 변동
         gameResultService.changingCardNumber(gamescores);
+
+        // 각 카테고리 점수별 운세 결과 DB적용 및 model에 입력
+        Map<String, Object> categoryResult = gameResultService.getCategoryResult(gamescores);
+        model.addAttribute("categoryResult", categoryResult);
 
         // 트럼프 이미지 경로 model에 넣기
         Map<String, Object> cardPath = gameResultService.balanceTrump(gamescores);
@@ -102,9 +101,8 @@ public class BalanceGameController {
 
 
 
+
         return "gameresult";
-
-
     }
 
 
@@ -120,7 +118,7 @@ public class BalanceGameController {
 
 
         WishTree wishTree = new WishTree();
-        wishTree.setUserId("testId"); // 추후 로그인 연동하면 로그인했을 때 세션으로 가져온 유저아이디로 변경할 것
+        wishTree.setUserId("testId1"); // 추후 로그인 연동하면 로그인했을 때 세션으로 가져온 유저아이디로 변경할 것
         wishTree.setUserWish(userWish);
         System.out.println("wishTree : " + wishTree);
         wishTreeService.insertWish(wishTree);

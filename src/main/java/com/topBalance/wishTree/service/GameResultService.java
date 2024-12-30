@@ -25,4 +25,13 @@ public interface GameResultService {
     void changingCardNumber(GameScores gameScores);
 
     int getChaingNumber(int cardNumber);
+
+    Map<String, Object> getOldCardScores(GameScores gameScores);
+
+    Map<String, Object> getCategoryResult(GameScores gameScores);
+
+    CardType getMaxCategory(GameScores gameScores);
+
+    CardType getMinCategory(GameScores gameScores);
+
 }

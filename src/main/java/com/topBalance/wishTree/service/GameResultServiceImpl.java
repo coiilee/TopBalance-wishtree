@@ -88,4 +88,50 @@ public class GameResultServiceImpl implements GameResultService {
         return 0;
     }
 
+    @Override
+    public Map<String, Object> getOldCardScores(GameScores gamescores) {
+        Map<String, Object> categoryScore = new HashMap<>();
+        categoryScore.put("spadeScore", gamescores.getSpadeScore());
+        categoryScore.put("cloverScore", gamescores.getCloverScore());
+        categoryScore.put("heartScore", gamescores.getHeartScore());
+        categoryScore.put("diamondScore", gamescores.getDiamondScore());
+        return categoryScore;
+    }
+
+    @Override
+    public Map<String, Object> getCategoryResult(GameScores gameScores) {
+        Map<String, Object> categoryResult = new HashMap<>();
+        categoryResult.put("spadeResult", todaysLuckMapper.todaysLuck(CardType.SPADE, gameScores.getSpadeScore()));
+        categoryResult.put("cloverResult", todaysLuckMapper.todaysLuck(CardType.CLOVER, gameScores.getCloverScore()));
+        categoryResult.put("heartResult", todaysLuckMapper.todaysLuck(CardType.HEART, gameScores.getHeartScore()));
+        categoryResult.put("diamondResult", todaysLuckMapper.todaysLuck(CardType.DIAMOND, gameScores.getDiamondScore()));
+
+        return categoryResult;
+    }
+
+    @Override
+    public CardType getMinCategory(GameScores gameScores) {
+        Map<Integer, CardType> allScores = new HashMap<>();
+        allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
+        allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
+        allScores.put(gameScores.getHeartScore(), CardType.HEART);
+        allScores.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+
+        int MaxValue = Math.max(Math.max(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.max(gameScores.getHeartScore(), gameScores.getDiamondScore()));
+
+        return allScores.get(MaxValue);
+    }
+
+    @Override
+    public CardType getMaxCategory(GameScores gameScores) {
+        Map<Integer, CardType> allScores = new HashMap<>();
+        allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
+        allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
+        allScores.put(gameScores.getHeartScore(), CardType.HEART);
+        allScores.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+
+        int MinValue = Math.min(Math.min(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.min(gameScores.getHeartScore(), gameScores.getDiamondScore()));
+
+        return allScores.get(MinValue);
+    }
 }
