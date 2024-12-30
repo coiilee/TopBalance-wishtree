@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>TOPBALANCE - 게임 결과</title>
+    <style>
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            max-width: 500px;
+            width: 100%;
+            background-color: hsl(56, 100%, 92%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            position: relative;
+        }
+        .total-luck {
+            width: 80%;
+            flex-direction: column;
+            height: 100px;
+            text-align: center;
+            border: 1px solid black;
+            border-radius: 15px;
+            background-color: white;
+            margin: auto;
+        }
+        .total-luck p {
+            font-size: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .result-container a {
+            margin: auto;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .result-container a:hover {
+            color: orangered;
+        }
+
+        .trump {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .trump p {
+            margin: 13px;
+            width: 80px;
+            height: 100px;
+        }
+
+        .trump p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /*.trump-luck p {*/
+        /*    margin: 0px 30px;*/
+        /*    text-align: center;*/
+        /*    font-weight: bold;*/
+        /*}*/
+
+
+        .luck-sentence {
+            margin: auto;
+            font-weight: bold;
+            width: 80%;
+            height: 100%;
+            flex-direction: column;
+            text-align: left;
+            border: 1px solid black;
+            border-radius: 15px;
+            background-color: white;
+        }
+        .luck-sentence h3 {
+            text-align: center;
+        }
+
+        .lucky-menu {
+            margin: auto;
+            font-weight: bold;
+            width: 80%;
+            height: 100%;
+            flex-direction: column;
+            text-align: left;
+            border: 1px solid black;
+            border-radius: 15px;
+            background-color: white;
+            text-align: center;
+        }
+
+        .lucky-menu img {
+            width: 160px;
+            height: 130px;
+        }
+
+        .wishinput {
+            text-align: center;
+            margin: auto;
+        }
+        .wishinput input {
+            display: flex;
+            border-radius: 15px;
+            margin-right: 5px;
+            background-color: lightgray;
+            width: 300px;
+            height: 30px;
+            border: none;
+        }
+        .wishinput img {
+            width: 15px;
+            height: 15px;
+        }
+        .wishinput label {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+
+<div class="result-container">
+    <form action="/gameresult" method="get" enctype="multipart/form-data">
+        <div class="total-luck">
+            <p>행운지수 :</p><p th:text="${totalScore}"></p>
+        </div>
+
+        <br />
+
+        <div class="trump" th:each="${cardPath}">
+            <p th:text="${cardPath.spadePath}"></p>
+            <p th:text="${cardPath.cloverPath}"></p>
+            <p th:text="${cardPath.heartPath}"></p>
+            <p th:text="${cardPath.diamondPath}"></p>
+
+        </div>
+
+        <hr />
+
+        <div class="luck-sentence">
+            <h3><p th:text="${result['']}"></p></h3>
+            <p>
+                ▷ 오늘의 건강운 :<br />
+            <p th:text="${result['C']}"></p>
+            ▷ 오늘의 재물운 :<br />
+            <p th:text="${result['D']}"></p>
+            ▷ 오늘의 학업운 :<br />
+            <p th:text="${result['S']}"></p>
+            ▷ 오늘의 연애운 :
+            <p th:text="${result['H']}"></p>
+            </p>
+        </div>
+
+        <hr />
+        <div class="lucky-menu">
+            <h3>오늘의 추천메뉴</h3>
+            <p th:text="${todaysLunch}"></p>
+        </div>
+
+
+        <hr />
+        <form class="wishinput">
+            <label>
+                <input
+                        type="text"
+                        maxlength="100"
+                        placeholder="소원나무에 소원을 작성해 보세요!"
+                        required
+                />
+                <button type="submit">
+                    <img src="../02_CSS/image/Group.png" />
+                </button>
+            </label>
+        </form>
+        <hr />
+        <a href="/bamboo.html">댓글 보러가기</a>
+        <hr />
+    </form>
+</div>
+</body>
+</html>

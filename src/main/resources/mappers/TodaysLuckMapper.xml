@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="com.topBalance.wishTree.mapper.TodaysLuckMapper">
+
+
+    <!--카드 타입에 맞는(건강,재물,연애,학업별 문장 출력) 결과 출력하기 -->
+    <select id="todaysLuck">
+        SELECT CARD_RESULT
+        FROM TODAYSLUCK
+        WHERE CARD_TYPE = #{cardType}
+          AND CARD_NUMBER = #{cardNumber}
+    </select>
+
+
+
+
+
+
+</mapper>
+

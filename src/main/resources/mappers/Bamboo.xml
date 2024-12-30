@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- java 어떤 파일에 sql 문을 보낼지 경로 설정
+    namespace 내에 mapper경로 작성-->
+<mapper namespace="com.topBalance.wishTree.mapper.BambooChattingMapper">
+    <!-- sql 문을 보낼 때 보낼 표기명 id에 작성-->
+    <select id="getAllBamboos" >
+        SELECT * FROM bamboo
+    </select>
+
+    <select id="test">
+        SELECT NOW() FROM dual;
+    </select>
+
+    <insert id="insertBamboo">
+        INSERT INTO bamboo (user_id, comment, comment_date) values(#{userId}, #{comment}, NOW());
+    </insert>
+
+    <delete id="deleteRecentBamboo">
+        DELETE FROM bamboo
+        ORDER BY comment_date
+        LIMIT 1;
+    </delete>
+
+
+
+
+</mapper>
