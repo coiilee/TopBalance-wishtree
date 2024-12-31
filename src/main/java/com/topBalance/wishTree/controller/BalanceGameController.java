@@ -80,9 +80,6 @@ public class BalanceGameController {
         Map<String, Object> categoryScore = gameResultService.getOldCardScores(gamescores);
         model.addAttribute("categoryScore", categoryScore);
 
-        // 각 카테고리 점수별 운세 문장 출력
-        Map<String, Object> categoryResult = gameResultService.getCategoryResult(gamescores);
-        model.addAttribute("categoryResult", categoryResult);
 
         // 카드 max, min 찾아서 점심 값 넣기
         CardType MAX = gameResultService.getMaxCategory(gamescores);
@@ -94,13 +91,16 @@ public class BalanceGameController {
         String lunchPath = gameResultService.getTodaysLunchPath(MAX, MIN);
         model.addAttribute("lunchPath", lunchPath);
 
-        // 게임점수를 카드점수로 변동
+        // 게임점수를 카드점수로 변동 --> 트럼프 이미지 경로, 카테고리별 문장 출력은 카드점수 변동 후에 작성해야함!!!!!!!!!!
         gameResultService.changingCardNumber(gamescores);
 
         // 트럼프 이미지 경로 model에 넣기
         Map<String, Object> cardPath = gameResultService.balanceTrump(gamescores);
         model.addAttribute("cardPath", cardPath);
 
+        // 각 카테고리 점수별 운세 문장 출력
+        Map<String, Object> categoryResult = gameResultService.getCategoryResult(gamescores);
+        model.addAttribute("categoryResult", categoryResult);
 
         return "gameresult";
     }
