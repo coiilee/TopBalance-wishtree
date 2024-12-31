@@ -22,8 +22,6 @@ public class GameResultServiceImpl implements GameResultService {
     @Autowired
     private TodaysLunchMapper todaysLunchMapper;
 
-
-
 //    @Override
 //    public String balanceTrump(int score_s, int score_c, int score_d, int score_h, MultipartFile trumpImagePath) {
 //        String spadeScore = "/images/trumpcard/trumpimage/S"+ score_s + ".png";
@@ -33,6 +31,13 @@ public class GameResultServiceImpl implements GameResultService {
 //        return new String[4];
 //    }
 
+    //게임 스코어 총합
+    @Override
+    public int totalScore(GameScores gameScores) {
+        return gameScores.getSpadeScore() + gameScores.getCloverScore() + gameScores.getHeartScore() + gameScores.getDiamondScore();
+    }
+
+    //트럼프카드 사진 경로 점수대로 가져오는 설정
     @Override
     public Map<String, Object> balanceTrump(GameScores gameScores) {
         Map<String, Object> pathMap = new HashMap<>();
@@ -43,35 +48,31 @@ public class GameResultServiceImpl implements GameResultService {
         return pathMap;
     }
 
-
     @Override
     public String todaysLuck(CardType cardType, int cardNumber) {
-        String result = todaysLuckMapper.todaysLuck(cardType, cardNumber);
-        return result;
+        return "";
     }
 
+    //게임 결과로 나온 점수 카테고리(재물,연애,학업,건강)별로 불러오기
     @Override
-   public String todaysLunch(CardType lunchMax, CardType lunchMin) {
-        return todaysLunchMapper.todaysLunch(lunchMax, lunchMin);
+    public Map<String, Object> getOldCardScores(GameScores gamescores) {
+        Map<String, Object> categoryScore = new HashMap<>();
+        categoryScore.put("spadeScore", gamescores.getSpadeScore());
+        categoryScore.put("cloverScore", gamescores.getCloverScore());
+        categoryScore.put("heartScore", gamescores.getHeartScore());
+        categoryScore.put("diamondScore", gamescores.getDiamondScore());
+        return categoryScore;
     }
 
+//    @Override
+//    public String todaysLuck(CardType cardType, int cardNumber) {
+//        String result = todaysLuckMapper.todaysLuck(cardType, cardNumber);
+//        return result;
+//    }
 
-
+    // 게임결과 점수는 25점까지이기 때문에, 점수를 카드점수로(13까지)로 변환해주는 기능
     @Override
-    public int totalScore(GameScores gameScores) {
-        return gameScores.getSpadeScore() + gameScores.getCloverScore() + gameScores.getHeartScore() + gameScores.getDiamondScore();
-    }
-
-    @Override
-    public void changingCardNumber(GameScores gameScores) {
-        gameScores.setSpadeScore(getChaingNumber(gameScores.getSpadeScore()));
-        gameScores.setCloverScore(getChaingNumber(gameScores.getCloverScore()));
-        gameScores.setHeartScore(getChaingNumber(gameScores.getHeartScore()));
-        gameScores.setDiamondScore(getChaingNumber(gameScores.getDiamondScore()));
-    }
-
-    @Override
-    public int getChaingNumber(int cardNumber) {
+    public int getChangingNumber(int cardNumber) {
         if (cardNumber == 25) return 1;
         if (cardNumber >= 0 && cardNumber <= 2) return 2;
         if (cardNumber == 3 || cardNumber == 4) return 3;
@@ -88,16 +89,7 @@ public class GameResultServiceImpl implements GameResultService {
         return 0;
     }
 
-    @Override
-    public Map<String, Object> getOldCardScores(GameScores gamescores) {
-        Map<String, Object> categoryScore = new HashMap<>();
-        categoryScore.put("spadeScore", gamescores.getSpadeScore());
-        categoryScore.put("cloverScore", gamescores.getCloverScore());
-        categoryScore.put("heartScore", gamescores.getHeartScore());
-        categoryScore.put("diamondScore", gamescores.getDiamondScore());
-        return categoryScore;
-    }
-
+    // 카테고리별로 운세 한문장 출력하기
     @Override
     public Map<String, Object> getCategoryResult(GameScores gameScores) {
         Map<String, Object> categoryResult = new HashMap<>();
@@ -107,6 +99,21 @@ public class GameResultServiceImpl implements GameResultService {
         categoryResult.put("diamondResult", todaysLuckMapper.todaysLuck(CardType.DIAMOND, gameScores.getDiamondScore()));
 
         return categoryResult;
+    }
+
+    //todayslunch 오늘의 추천메뉴 max, min
+    @Override
+    public String todaysLunch(CardType lunchMax, CardType lunchMin) {
+        return todaysLunchMapper.todaysLunch(lunchMax, lunchMin);
+    }
+    //게임점수인 gameScores.getSpadeScore()를 카드숫자로 변환(getChangingNumber)하고,
+    //변환된 값은 set 으로 다시 저장
+    @Override
+    public void changingCardNumber(GameScores gameScores) {
+        gameScores.setSpadeScore(getChangingNumber(gameScores.getSpadeScore()));
+        gameScores.setCloverScore(getChangingNumber(gameScores.getCloverScore()));
+        gameScores.setHeartScore(getChangingNumber(gameScores.getHeartScore()));
+        gameScores.setDiamondScore(getChangingNumber(gameScores.getDiamondScore()));
     }
 
     @Override
@@ -121,12 +128,7 @@ public class GameResultServiceImpl implements GameResultService {
 
         return allScores.get(MaxValue);
         */
-        Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        });
+        Map<Integer, CardType> treemap = new TreeMap<>((o1, o2) -> o1.compareTo(o2)); //내림차순
         treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
         treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
         treemap.put(gameScores.getHeartScore(), CardType.HEART);
@@ -143,7 +145,7 @@ public class GameResultServiceImpl implements GameResultService {
         Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
+                return o2.compareTo(o1); // 올림차순
             }
         });
         treemap.put(gameScores.getSpadeScore(), CardType.SPADE);

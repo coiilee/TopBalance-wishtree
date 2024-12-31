@@ -9,22 +9,21 @@ import java.util.Map;
 
 public interface GameResultService {
 
+    //행운 총 점수 더한 total score
+    int totalScore(GameScores gameScores);
 
-        // 트럼프 카드 + 운세점수 출력 - score_s / score_c / score_h /score_d
-//    String balanceTrump(int score_s, int score_c, int score_d, int score_h, MultipartFile trumpImagePath);
+    // 트럼프 카드 경로 가져노기
     Map<String, Object> balanceTrump(GameScores gameScores);
 
-    // 오늘의 운세 문구 (건강,재물,연애,학업별 문장 출력)
+    // 오늘의 운세 문구 (건강,재물,연애,학업별 운세 한문장 출력)
     String todaysLuck(CardType cardType, int cardNumber);
 
     // 오늘의 추천메뉴 사진+메뉴(lunchResult)출력
     String todaysLunch(CardType lunchMax, CardType lunchMin);
 
-    int totalScore(GameScores gameScores);
-
     void changingCardNumber(GameScores gameScores);
 
-    int getChaingNumber(int cardNumber);
+    int getChangingNumber(int cardNumber);
 
     Map<String, Object> getOldCardScores(GameScores gameScores);
 
