@@ -10,25 +10,23 @@
             flex: 1;
             max-width: 500px;
             width: 100%;
-            background-color: hsl(56, 100%, 92%);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            position: relative;
+            background-color: hsl(41.16deg 100% 88.69% / 98%);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
         }
         .total-luck {
             width: 80%;
-            flex-direction: column;
-            height: 100px;
             text-align: center;
-            border: 1px solid black;
+            border: 3px solid black;
             border-radius: 15px;
             background-color: white;
-            margin: auto;
+            margin: 20px 40px 20px 45px;
         }
         .total-luck p {
             font-size: 30px;
             text-align: center;
             font-weight: bold;
+            display: inline-block;
         }
 
         .result-container a {
@@ -36,6 +34,7 @@
             text-decoration: none;
             color: black;
             font-weight: bold;
+            font-size: 20px;
         }
         .result-container a:hover {
             color: orangered;
@@ -44,57 +43,63 @@
         .trump {
             display: flex;
             justify-content: center;
-            align-items: center;
-        }
-        .trump img {
-            margin: 13px;
-            width: 80px;
-            height: 100px;
+            /*flex-wrap: wrap;*/
+            gap: 25px;
         }
 
-        .trump p {
+        .trump .card {
             display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        /*.trump-luck p {*/
-        /*    margin: 0px 30px;*/
-        /*    text-align: center;*/
-        /*    font-weight: bold;*/
-        /*}*/
-
-
-        .luck-sentence {
-            margin: auto;
-            font-weight: bold;
-            width: 80%;
-            height: 100%;
             flex-direction: column;
-            text-align: left;
-            border: 1px solid black;
-            border-radius: 15px;
-            background-color: white;
-        }
-        .luck-sentence h3 {
+            align-items: center;
             text-align: center;
         }
 
+        .trump .card img {
+            margin: 10px 0;
+            width: 80px;
+            height: 110px;
+        }
+
+        .trump .card span {
+            margin-top: 5px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .luck-sentence {
+            margin: 20px 45px 20px 45px;
+            width: 80%;
+            height: 100%;
+            border: 3px solid black;
+            border-radius: 15px;
+            background-color: white;
+
+        }
+
+        .luck-sentence .luck-text {
+            font-weight: bold;
+            text-align: left;
+            padding: 30px;
+        }
         .lucky-menu {
-            margin: auto;
+            margin: 10px 45px 10px 45px;
             font-weight: bold;
             width: 80%;
             height: 100%;
             flex-direction: column;
-            text-align: left;
-            border: 1px solid black;
+            border: 3px solid black;
             border-radius: 15px;
             background-color: white;
             text-align: center;
         }
 
         .lucky-menu img {
-            width: 160px;
-            height: 130px;
+            width: 200px;
+            height: 180px;
+            border-radius: 10px;
+        }
+        .lucky-menu p {
+            font-size: 20px;
         }
 
         .wishinput {
@@ -106,8 +111,8 @@
             border-radius: 15px;
             margin-right: 5px;
             background-color: lightgray;
-            width: 300px;
-            height: 30px;
+            width: 350px;
+            height: 35px;
             border: none;
         }
         .wishinput img {
@@ -117,6 +122,14 @@
         .wishinput label {
             display: flex;
         }
+
+        .wishinput button {
+            border-radius: 10px;
+            border: 2px gray;
+        }
+        .luck-sentence .luck-text {
+            margin-outside: 20px;
+        }
     </style>
 </head>
 <body>
@@ -124,44 +137,72 @@
 <div class="result-container">
 
     <div class="total-luck">
-            <p>행운지수 :</p><p th:text="${totalScore}"></p>
+            <p>행운지수 : <p th:text="${totalScore}"></p></p>
     </div>
-
     <br />
+<!--    <div class="trump">-->
+<!--           <img th:src="${cardPath.cloverPath}">-->
+<!--           <img th:src="${cardPath.diamondPath}">-->
+<!--           <img th:src="${cardPath.spadePath }">-->
+<!--           <img th:src="${cardPath.heartPath}">-->
 
+<!--        <span>건강운</span>-->
+<!--        <span th:text="${categoryScore.cloverScore}"></span>-->
+<!--        <span>재물운</span>-->
+<!--        <span th:text="${categoryScore.diamondScore}"></span>-->
+<!--        <span>학업운</span>-->
+<!--        <span th:text="${categoryScore.spadeScore}"></span>-->
+<!--        <span>연애운</span>-->
+<!--        <span th:text="${categoryScore.heartScore}"></span>-->
+
+<!--    </div>-->
     <div class="trump">
-
-           <img th:src="${cardPath.cloverPath}">
-        <p>건강운</p>
-        <p th:text="${categoryScore.cloverScore}"></p>
-           <img th:src="${cardPath.diamondPath}">
-        <p>재물운</p>
-        <p th:text="${categoryScore.diamondScore}"></p>
-           <img th:src="${cardPath.spadePath }">
-        <p>학업운</p>
-        <p th:text="${categoryScore.spadeScore}"></p>
-           <img th:src="${cardPath.heartPath}">
-        <p>연애운</p>
-        <p th:text="${categoryScore.heartScore}"></p>
+        <div class="card">
+            <img th:src="${cardPath.cloverPath}">
+            <span>건강운</span>
+            <span th:text="${categoryScore.cloverScore}"></span>
+        </div>
+        <div class="card">
+            <img th:src="${cardPath.diamondPath}">
+            <span>재물운</span>
+            <span th:text="${categoryScore.diamondScore}"></span>
+        </div>
+        <div class="card">
+            <img th:src="${cardPath.spadePath}">
+            <span>학업운</span>
+            <span th:text="${categoryScore.spadeScore}"></span>
+        </div>
+        <div class="card">
+            <img th:src="${cardPath.heartPath}">
+            <span>연애운</span>
+            <span th:text="${categoryScore.heartScore}"></span>
+        </div>
     </div>
         <hr />
 
         <div class="luck-sentence">
-            <p>오늘의 건강운 : </p>
-            <p th:text="${categoryResult.cloverResult}"></p>
-            <p>오늘의 재물운 :</p>
-            <p th:text="${categoryResult.diamondResult}"></p>
-            <p>오늘의 학업운 :</p>
-            <p th:text="${categoryResult.spadeResult}"></p>
-            <p>오늘의 연애운 : </p>
-            <p th:text="${categoryResult.heartResult}"></p>
+            <div class="luck-text">
+            <span>▷ 오늘의 건강운 : </span>
+            <span th:text="${categoryResult.cloverResult}"></span>
+            <br><br>
+            <span>▷ 오늘의 재물운 :</span>
+            <span th:text="${categoryResult.diamondResult}"></span>
+            <br><br>
+            <span>▷ 오늘의 학업운 :</span>
+            <span th:text="${categoryResult.spadeResult}"></span>
+            <br><br>
+            <span>▷ 오늘의 연애운 : </span>
+            <span th:text="${categoryResult.heartResult}"></span>
+            <br><br>
+            </div>
         </div>
 
-        <hr />
         <div class="lucky-menu">
-            <h3>오늘의 추천메뉴</h3>
+            <h2>오늘의 추천메뉴</h2>
+            <br>
+            <img th:src="${lunchPath}">
             <p th:text="${todaysLunch}"></p>
-            <!--<img th:src="${}">-->
+            <br>
         </div>
 
 
@@ -177,7 +218,7 @@
                         required
                 />
                 <button type="submit">
-                    <img src="../02_CSS/image/Group.png" />
+                    <img src="images/Group.png" />
                 </button>
             </label>
         </form>

@@ -111,7 +111,7 @@ public class GameResultServiceImpl implements GameResultService {
 
     @Override
     public CardType getMinCategory(GameScores gameScores) {
-        Map<Integer, CardType> allScores = new HashMap<>();
+        /*Map<Integer, CardType> allScores = new HashMap<>();
         allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
         allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
         allScores.put(gameScores.getHeartScore(), CardType.HEART);
@@ -120,18 +120,67 @@ public class GameResultServiceImpl implements GameResultService {
         int MaxValue = Math.max(Math.max(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.max(gameScores.getHeartScore(), gameScores.getDiamondScore()));
 
         return allScores.get(MaxValue);
+        */
+        Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
+        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
+        treemap.put(gameScores.getHeartScore(), CardType.HEART);
+        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+
+        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
+        System.out.println("Min : " + minCardType.getValue());
+        return minCardType.getValue();
     }
+
 
     @Override
     public CardType getMaxCategory(GameScores gameScores) {
-        Map<Integer, CardType> allScores = new HashMap<>();
-        allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
-        allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
-        allScores.put(gameScores.getHeartScore(), CardType.HEART);
-        allScores.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+        Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
+        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
+        treemap.put(gameScores.getHeartScore(), CardType.HEART);
+        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
 
-        int MinValue = Math.min(Math.min(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.min(gameScores.getHeartScore(), gameScores.getDiamondScore()));
-
-        return allScores.get(MinValue);
+        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
+        System.out.println("Max : " + minCardType.getValue());
+        return minCardType.getValue();
     }
+
+    @Override
+    public String getTodaysLunchPath(CardType MAX, CardType MIN) {
+        String answer = "/images/lunchmenu/";
+        if (MAX.equals(CardType.SPADE)) {
+            if (MIN.equals(CardType.CLOVER)) answer += "yakinikku.jpg";
+            if (MIN.equals(CardType.HEART)) answer += "jjajangmyeon.jpg";
+            if (MIN.equals(CardType.DIAMOND)) answer += "kimbap.jpg";
+        }
+        if (MAX.equals(CardType.CLOVER)) {
+            if (MIN.equals(CardType.SPADE)) answer += "godeungeojorim.jpg";
+            if (MIN.equals(CardType.HEART)) answer += "gookbap.jpg";
+            if (MIN.equals(CardType.DIAMOND)) answer += "cupramen.jpg";
+        }
+        if (MAX.equals(CardType.HEART)) {
+            if (MIN.equals(CardType.SPADE)) answer += "bibimbob.jpg";
+            if (MIN.equals(CardType.CLOVER)) answer += "gomtang.jpg";
+            if (MIN.equals(CardType.DIAMOND)) answer += "tteokbokki.jpg";
+        }
+        if (MAX.equals(CardType.DIAMOND)) {
+            if (MIN.equals(CardType.SPADE)) answer += "grilledduck.jpg";
+            if (MIN.equals(CardType.CLOVER)) answer += "samgyetang.jpeg";
+            if (MIN.equals(CardType.HEART)) answer += "sushi.jpg";
+        }
+
+        return answer;
+    }
+
 }

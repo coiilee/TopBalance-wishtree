@@ -83,24 +83,22 @@ public class BalanceGameController {
         // 카드 max, min 찾아서 점심 값 넣기
         CardType MAX = gameResultService.getMaxCategory(gamescores);
         CardType MIN = gameResultService.getMinCategory(gamescores);
-        String todaysLunch = gameResultService.todaysLunch(CardType.SPADE, CardType.HEART);
+        String todaysLunch = gameResultService.todaysLunch(MAX, MIN);
         model.addAttribute("todaysLunch", todaysLunch);
+        // MAX 와 MIN에 따른 점심메뉴 이미지 경로 찾기 및 model에 넣기
+        String lunchPath = gameResultService.getTodaysLunchPath(MAX, MIN);
+        model.addAttribute("lunchPath", lunchPath);
 
         // 각 카드 값 변동
         gameResultService.changingCardNumber(gamescores);
-
-        // 각 카테고리 점수별 운세 결과 DB적용 및 model에 입력
-        Map<String, Object> categoryResult = gameResultService.getCategoryResult(gamescores);
-        model.addAttribute("categoryResult", categoryResult);
 
         // 트럼프 이미지 경로 model에 넣기
         Map<String, Object> cardPath = gameResultService.balanceTrump(gamescores);
         model.addAttribute("cardPath", cardPath);
 
-        //s,c,h,d 별 운세 문장 출력
-
-
-
+        // 각 카테고리 점수별 운세 결과 DB적용 및 model에 입력
+        Map<String, Object> categoryResult = gameResultService.getCategoryResult(gamescores);
+        model.addAttribute("categoryResult", categoryResult);
 
         return "gameresult";
     }

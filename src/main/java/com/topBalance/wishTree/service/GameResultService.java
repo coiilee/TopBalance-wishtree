@@ -34,4 +34,6 @@ public interface GameResultService {
 
     CardType getMinCategory(GameScores gameScores);
 
+    String getTodaysLunchPath(CardType MAX, CardType MIN);
+
 }
