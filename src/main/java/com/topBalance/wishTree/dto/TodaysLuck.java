@@ -19,3 +19,4 @@ public class TodaysLuck {
     private int cardNumber;
     private String cardResult;
 }
+

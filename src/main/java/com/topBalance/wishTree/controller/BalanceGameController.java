@@ -80,7 +80,6 @@ public class BalanceGameController {
         Map<String, Object> categoryScore = gameResultService.getOldCardScores(gamescores);
         model.addAttribute("categoryScore", categoryScore);
 
-
         // 카드 max, min 찾아서 점심 값 넣기
         CardType MAX = gameResultService.getMaxCategory(gamescores);
         CardType MIN = gameResultService.getMinCategory(gamescores);

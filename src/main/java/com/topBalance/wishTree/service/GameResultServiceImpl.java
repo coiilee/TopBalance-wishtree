@@ -12,13 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.stream.Collectors;
 
-// @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Service
 public class GameResultServiceImpl implements GameResultService {
 
     @Autowired
     private TodaysLuckMapper todaysLuckMapper;
-
     @Autowired
     private TodaysLunchMapper todaysLunchMapper;
 
