@@ -46,10 +46,10 @@ public class GameResultServiceImpl implements GameResultService {
         return pathMap;
     }
 
-    @Override
-    public String todaysLuck(CardType cardType, int cardNumber) {
-        return "";
-    }
+//    @Override
+//    public String todaysLuck(CardType cardType, int cardNumber) {
+//        return "";
+//    }
 
     //게임 결과로 나온 점수 카테고리(재물,연애,학업,건강)별로 불러오기
     @Override
@@ -116,44 +116,53 @@ public class GameResultServiceImpl implements GameResultService {
 
     @Override
     public CardType getMinCategory(GameScores gameScores) {
-        /*Map<Integer, CardType> allScores = new HashMap<>();
+        Map<Integer, CardType> allScores = new HashMap<>();
+        allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
+        allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
+        allScores.put(gameScores.getHeartScore(), CardType.HEART);
+        allScores.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+
+        int MinValue = Math.min(Math.min(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.min(gameScores.getHeartScore(), gameScores.getDiamondScore()));
+        System.out.println("Min : " + MinValue);
+        return allScores.get(MinValue);
+
+//        Map<Integer, CardType> treemap = new TreeMap<>((o1, o2) -> o1.compareTo(o2)); //내림차순
+//        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
+//        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
+//        treemap.put(gameScores.getHeartScore(), CardType.HEART);
+//        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+//
+//        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
+//        System.out.println("Min : " + minCardType.getValue());
+//        return minCardType.getValue();
+    }
+
+
+    @Override
+    public CardType getMaxCategory(GameScores gameScores) {
+        Map<Integer, CardType> allScores = new HashMap<>();
         allScores.put(gameScores.getSpadeScore(), CardType.SPADE);
         allScores.put(gameScores.getCloverScore() , CardType.CLOVER);
         allScores.put(gameScores.getHeartScore(), CardType.HEART);
         allScores.put(gameScores.getDiamondScore(), CardType.DIAMOND);
 
         int MaxValue = Math.max(Math.max(gameScores.getSpadeScore(), gameScores.getCloverScore()), Math.max(gameScores.getHeartScore(), gameScores.getDiamondScore()));
-
+        System.out.println("Max : " + MaxValue);
         return allScores.get(MaxValue);
-        */
-        Map<Integer, CardType> treemap = new TreeMap<>((o1, o2) -> o1.compareTo(o2)); //내림차순
-        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
-        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
-        treemap.put(gameScores.getHeartScore(), CardType.HEART);
-        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
-
-        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
-        System.out.println("Min : " + minCardType.getValue());
-        return minCardType.getValue();
-    }
-
-
-    @Override
-    public CardType getMaxCategory(GameScores gameScores) {
-        Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1); // 올림차순
-            }
-        });
-        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
-        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
-        treemap.put(gameScores.getHeartScore(), CardType.HEART);
-        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
-
-        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
-        System.out.println("Max : " + minCardType.getValue());
-        return minCardType.getValue();
+//        Map<Integer, CardType> treemap = new TreeMap<>(new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                return o2.compareTo(o1); // 올림차순
+//            }
+//        });
+//        treemap.put(gameScores.getSpadeScore(), CardType.SPADE);
+//        treemap.put(gameScores.getCloverScore(), CardType.CLOVER);
+//        treemap.put(gameScores.getHeartScore(), CardType.HEART);
+//        treemap.put(gameScores.getDiamondScore(), CardType.DIAMOND);
+//
+//        Map.Entry<Integer, CardType> minCardType = treemap.entrySet().iterator().next();
+//        System.out.println("Max : " + minCardType.getValue());
+//        return minCardType.getValue();
     }
 
     @Override

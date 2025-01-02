@@ -16,7 +16,7 @@ public interface GameResultService {
     Map<String, Object> balanceTrump(GameScores gameScores);
 
     // 오늘의 운세 문구 (건강,재물,연애,학업별 운세 한문장 출력)
-    String todaysLuck(CardType cardType, int cardNumber);
+//    String todaysLuck(CardType cardType, int cardNumber);
 
     // 오늘의 추천메뉴 사진+메뉴(lunchResult)출력
     String todaysLunch(CardType lunchMax, CardType lunchMin);
