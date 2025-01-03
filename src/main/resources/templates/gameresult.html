@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>TOPBALANCE - 게임 결과</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <script src="/js/script.js" defer></script>
     <style>
         .result-container {
             display: flex;
@@ -134,7 +136,7 @@
     </style>
 </head>
 <body>
-
+<th:block th:replace="~{layout/header :: header}"></th:block>
 <div class="result-container">
 
     <div class="total-luck">
@@ -209,6 +211,7 @@
 
         <hr />
 
+    <th:block th:unless="${loggedInUser == null}">
         <form class="wishinput" action="/insertWish" method="post" onsubmit="return showAlert();">
             <label>
                 <input
@@ -223,6 +226,7 @@
                 </button>
             </label>
         </form>
+    </th:block>
         <hr />
         <a href="/bamboo">댓글 보러가기</a>
         <hr />

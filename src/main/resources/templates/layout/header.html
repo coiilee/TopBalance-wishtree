@@ -4,17 +4,23 @@
         <div class="logo"><span>BestBalance</span></div>
         <div class="icons">
             <span class="search-icon">&#128269;</span>
-            <span class="profile-icon">&#128100;</span>
+            <span class="profile-icon" th:if="${loggedInUser == null}" onclick="location.href='/login'">&#128100;</span>
+            <span class="profile-icon" th:if="${loggedInUser != null}" onclick="location.href='/mypage'">&#128101;</span>
         </div>
     </div>
     <div class="side-menu" id="sideMenu">
         <div class="close-icon" onclick="toggleMenu(false)">&times;</div>
         <ul>
-            <li><a href="#">최강배런스가 뭔가요?</a></li>
-            <li><a href="#">할 말 있어요</a></li>
-            <li><a href="#">심테공방</a></li>
-            <li><a href="#">bb가 만든 모든 심테보기</a></li>
-            <li><a href="#">제휴문의</a></li>
+            <li><a href="/">메인화면</a></li>
+            <li><a href="/balancegame">Start Game</a></li>
+            <li><a href="/bamboo">BAMBOO</a></li>
+            <li><a href="/gameresult">게임 결과</a></li>
+            <li><a th:if="${loggedInUser == null}" href="find-id">아이디 찾기</a></li>
+            <li><a th:if="${loggedInUser == null}" href="find-password">비밀번호 찾기</a></li>
+            <li><a th:if="${loggedInUser == null}" href="/register">회원가입</a></li>
+            <li><a th:if="${loggedInUser == null}" href="/login">로그인</a></li>
+            <li><a th:if="${loggedInUser != null}" href="/mypage">마이페이지</a></li>
+            <li><a th:if="${loggedInUser != null}" href="/logout">로그아웃</a></li>
         </ul>
     </div>
 </header>
