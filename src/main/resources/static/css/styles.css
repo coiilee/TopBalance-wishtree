@@ -9,6 +9,183 @@ body {
     min-height: 100vh;
 }
 
+/* 메인 컨테이너 */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 500px;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+}
+
+/* 이미지 정렬 */
+.image-placeholder img {
+    width: 600px;
+    height: 600px;
+    margin: 16px 0;
+}
+
+.main-header h1 {
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.main-header p {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+
+/* 네비게이션 바 */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.header {
+    text-align: center;
+    padding: 16px;
+    flex: 1;
+}
+
+.header img {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.header h1 {
+    font-size: 18px;
+    margin: 8px 0;
+    font-weight: bold;
+}
+
+.header p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* 사이드 메뉴 */
+.side-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+}
+
+.side-menu .close-icon {
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+    z-index: 2100;
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 50px 30px 0;
+    margin: 0;
+}
+
+.side-menu ul li {
+    margin: 10px 0;
+}
+
+.side-menu ul li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.side-menu ul li a:hover {
+    color: #007bff;
+}
+/* 햄버거 아이콘 */
+.menu-icon {
+    cursor: pointer;
+}
+
+.close-icon {
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+    z-index: 2100;
+}
+
+
+.menu-icon:hover,
+.close-icon:hover {
+    color: #007bff;
+}
+/* 푸터 */
+.footer {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 16px;
+    font-size: 14px;
+    color: #888;
+    border-top: 1px solid #ddd;
+    background-color: white;
+    box-sizing: border-box;
+    margin-top: auto;
+}
+/**************************************************************/
+/****************** 아래 추가 css 작성  ***********************/
+/**************************************************************/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
 
 .main-container, .balance-container, .result-container {
     display: flex;
@@ -235,3 +412,5 @@ body {
 .balance-container .answer-options {
     margin-top: 20px;
 }
+
+
